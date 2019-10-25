@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<style>
+.filterDiv {
+  float: left;
+  background-color: #2196F3;
+  color: #ffffff;
+  width: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin: 2px;
+  display: none; /* Hidden by default */
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Add a light grey background on mouse-over */
+.btn:hover {
+  background-color: #ddd;
+}
+
+/* Add a dark background to the active button */
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+</style>
+<head>
+  <title>Index Page</title>
+</head>
+<body>
+
+<h2>Welcome to Soo's Website</h2>
+ <p> Here are my life with which my family has maden <strong>together</strong>! Find me what I have done so far. Please click the buttons below to learn about my education, career, hobby, and volunteer jobs</p> 
+ <img src="Photo.jpg/" alt="My Photo">
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('Educations')"> Educations</button>
+  <button class="btn" onclick="filterSelection('Careers')">Careers</button>
+  <button class="btn" onclick="filterSelection('Hobbies')">Hobbies</button>
+  <button class="btn" onclick="filterSelection('Volunteer')"> Volunteers</button>
+</div>
+
+<div class="container">
+  <div class="filterDiv Educataions Careers">LDT</div>
+  <div class="filterDiv Volunteers">BCH</div>
+  <div class="filterDiv Educations">Coursera</div>
+  <div class="filterDiv Hobbies">Hiking</div>
+  <div class="filterDiv Educations Careers Hobbies Volunteers">Coding</div>
+  <div class="filterDiv Careers">Instructor</div>
+  <div class="filterDiv Educations Careers">UH</div>
+  <div class="filterDiv Careers">ICC</div>
+  <div class="filterDiv Careers Volunteers">Design</div>
+  <div class="filterDiv Volunteers">KLF</div>
+  </div>
+
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
+
+</body>
+</html>
